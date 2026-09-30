@@ -1,0 +1,13 @@
+services:
+  runner:
+    build:
+      context: .
+      args:
+        - RUNNER_VERSION=2.337.0
+        - RUNNER_SHA256=70920811a4f8ad4328818682bca5c6469c1c942fab52448868071d0063816613
+    image: local-container-runner
+    env_file:
+      - .env
+    # Bring the runner back after a crash or reboot. The runner's registration is
+    # kept inside the container, so a restart doesn't need a new token.
+    restart: unless-stopped
